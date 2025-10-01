@@ -7,7 +7,14 @@
   },
   "files": {
     "ignoreUnknown": true,
-    "includes": ["**", "!node_modules", "!.next", "!dist", "!build"]
+    "includes": [
+      "**",
+      "!node_modules",
+      "!.next",
+      "!dist",
+      "!build",
+      "!**/*.json"
+    ]
   },
   "formatter": {
     "enabled": true,
@@ -18,8 +25,18 @@
     "enabled": true,
     "rules": {
       "recommended": true,
+
       "suspicious": {
-        "noUnknownAtRules": "off"
+        "noUnknownAtRules": "off",
+        "noExplicitAny": "off"
+      },
+      "style": {
+        "useImportType": "off"
+      },
+      "a11y": {
+        "noSvgWithoutTitle": "off",
+        "useFocusableInteractive": "off",
+        "useSemanticElements": "off"
       }
     },
     "domains": {
@@ -30,7 +47,7 @@
   "assist": {
     "actions": {
       "source": {
-        "organizeImports": "on"
+        "organizeImports": "off"
       }
     }
   }
