@@ -1,3 +1,4 @@
+import { Toaster } from "@/components/ui/sonner";
 import { ThemeProvider } from "@/components/ui/theme-provider";
 
 interface GlobalProviderProps {
@@ -13,6 +14,7 @@ export default function GlobalProvider({ children }: GlobalProviderProps) {
       disableTransitionOnChange
     >
       {children}
+      <Toaster expand={false} richColors position="bottom-right" />
     </ThemeProvider>
   );
 }
