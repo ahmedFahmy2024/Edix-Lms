@@ -19,7 +19,6 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { useSignOut } from "@/hooks/use-signout";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 
 type UserDropdownProps = {
   name: string;
@@ -74,7 +73,7 @@ export default function UserDropdown({
             </Link>
           </DropdownMenuItem>
           <DropdownMenuItem asChild>
-            <Link href="/dashboard">
+            <Link href="/admin">
               <LayoutDashboard
                 size={16}
                 className="opacity-60"
