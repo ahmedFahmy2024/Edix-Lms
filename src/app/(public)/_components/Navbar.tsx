@@ -18,7 +18,7 @@ const navigationItems = [
   },
   {
     label: "Dashboard",
-    href: "/dashboard",
+    href: "/admin",
   },
 ];
 
