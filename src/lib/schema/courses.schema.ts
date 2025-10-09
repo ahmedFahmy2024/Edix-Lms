@@ -3,6 +3,18 @@ import { z } from "zod";
 export const courseLevel = ["Beginner", "Intermediate", "Advanced"] as const;
 export const courseStatus = ["Draft", "Published", "Archived"] as const;
 
+export const courseCategories = [
+  "Development",
+  "Business",
+  "Design",
+  "IT & Software",
+  "Health & Fitness",
+  "Music",
+  "Photography",
+  "Sports",
+  "Travel",
+] as const;
+
 export const courseSchema = z.object({
   title: z.string().min(3, {
     message: "Title must be at least 3 characters.",
@@ -20,7 +32,9 @@ export const courseSchema = z.object({
     message: "Duration must be at least 1.",
   }),
   level: z.enum(courseLevel),
-  category: z.string(),
+  category: z.enum(courseCategories, {
+    message: "Category is required.",
+  }),
   smallDescription: z.string().min(3, {
     message: "SmallDescription must be at least 3 characters.",
   }),
