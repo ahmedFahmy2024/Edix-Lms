@@ -8,7 +8,7 @@ import { S3 } from "@/lib/s3Client";
 
 export const fileUploadSchema = z.object({
   fileName: z.string().min(1, { message: "File name is required" }),
-  contentType: z.enum(["image", "video"], { message: "Invalid file type" }),
+  contentType: z.string().min(1, { message: "content type is required" }),
   size: z.number().min(1, { message: "File size is required" }),
   isImage: z.boolean(),
 });
