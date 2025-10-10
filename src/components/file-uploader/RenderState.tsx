@@ -1,6 +1,7 @@
 import { cn } from "@/lib/utils";
-import { CloudUploadIcon, ImageIcon } from "lucide-react";
+import { CloudUploadIcon, ImageIcon, XIcon } from "lucide-react";
 import { Button } from "../ui/button";
+import Image from "next/image";
 
 export default function RenderEmptyState({
   isDragActive,
@@ -42,6 +43,27 @@ export function RenderErrorState() {
       <p className="text-xs mt-1 text-muted-foreground">Something went wrong</p>
       <Button type="button" className="mt-4">
         Retry file selection
+      </Button>
+    </div>
+  );
+}
+
+export function RenderUploadedState({ previewUrl }: { previewUrl: string }) {
+  return (
+    <div>
+      <Image
+        src={previewUrl}
+        alt="preview"
+        fill
+        className="object-contain p-2"
+      />
+
+      <Button
+        variant="destructive"
+        size="icon"
+        className={cn("absolute top-4 right-4")}
+      >
+        <XIcon className="size-4" />
       </Button>
     </div>
   );

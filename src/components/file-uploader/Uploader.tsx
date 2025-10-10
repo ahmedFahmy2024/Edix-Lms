@@ -3,7 +3,10 @@ import { useCallback, useState } from "react";
 import { FileRejection, useDropzone } from "react-dropzone";
 import { Card, CardContent } from "../ui/card";
 import { cn } from "@/lib/utils";
-import RenderEmptyState, { RenderErrorState } from "./RenderState";
+import RenderEmptyState, {
+  RenderErrorState,
+  RenderUploadedState,
+} from "./RenderState";
 import { toast } from "sonner";
 import { v4 as uuidv4 } from "uuid";
 import { Loader2 } from "lucide-react";
@@ -54,6 +57,8 @@ export function Uploader() {
           isImage: file.type.includes("image"),
         }),
       });
+
+      console.log("presignedResponse", presignedResponse);
 
       if (!presignedResponse.ok) {
         toast.error("Failed to get presigned URL");
@@ -177,7 +182,7 @@ export function Uploader() {
     }
 
     if (fileState.objectUrl) {
-      return <div></div>;
+      return <RenderUploadedState previewUrl={fileState.objectUrl} />;
     }
 
     return <RenderEmptyState isDragActive={isDragActive} />;
