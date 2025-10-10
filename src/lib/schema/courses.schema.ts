@@ -23,7 +23,7 @@ export const courseSchema = z.object({
     message: "Description must be at least 3 characters.",
   }),
   fileKey: z.string().min(3, {
-    message: "FileKey must be at least 3 characters.",
+    message: "FileKey is required.",
   }),
   price: z.coerce.number().min(1, {
     message: "Price must be at least 1.",
