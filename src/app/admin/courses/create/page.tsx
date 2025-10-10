@@ -1,6 +1,8 @@
 "use client";
 
-import { buttonVariants } from "@/components/ui/button";
+import { Uploader } from "@/components/file-uploader/Uploader";
+import { RichTextEditor } from "@/components/rich-text-editor/Editor";
+import { Button, buttonVariants } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -8,18 +10,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { ArrowLeft, PlusIcon, SparkleIcon } from "lucide-react";
-import Link from "next/link";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import {
-  courseCategories,
-  courseLevel,
-  courseSchema,
-  CourseSchemaType,
-  courseStatus,
-} from "@/lib/schema/courses.schema";
-import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -29,8 +19,6 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import slugify from "slugify";
-import { Textarea } from "@/components/ui/textarea";
 import {
   Select,
   SelectContent,
@@ -38,7 +26,19 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { StarterKitExample } from "@/components/rich-text-editor/Editor";
+import { Textarea } from "@/components/ui/textarea";
+import {
+  courseCategories,
+  courseLevel,
+  courseSchema,
+  CourseSchemaType,
+  courseStatus,
+} from "@/lib/schema/courses.schema";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { ArrowLeft, PlusIcon, SparkleIcon } from "lucide-react";
+import Link from "next/link";
+import { useForm } from "react-hook-form";
+import slugify from "slugify";
 
 export default function CreateCoursePage() {
   const form = useForm<CourseSchemaType>({
@@ -62,6 +62,8 @@ export default function CreateCoursePage() {
     // ✅ This will be type-safe and validated.
     console.log(values);
   }
+
+  console.log("watch", form.watch());
   return (
     <>
       <div className="flex items-center gap-4">
@@ -155,7 +157,7 @@ export default function CreateCoursePage() {
                   <FormItem className="flex-1">
                     <FormLabel>Description</FormLabel>
                     <FormControl>
-                      <StarterKitExample />
+                      <RichTextEditor field={field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -169,7 +171,7 @@ export default function CreateCoursePage() {
                   <FormItem className="flex-1">
                     <FormLabel>Thumbnail image</FormLabel>
                     <FormControl>
-                      <Input placeholder="Thumbnail url" {...field} />
+                      <Uploader />
                     </FormControl>
                     <FormMessage />
                   </FormItem>

@@ -65,13 +65,14 @@ const extensions = [
   }),
 ];
 
-const content = "";
-
-export const StarterKitExample = () => {
+export const RichTextEditor = ({ field }: { field: any }) => {
   const editor = useEditor({
     extensions: extensions as Extension[],
-    content,
     immediatelyRender: false,
+    content: field.value ? JSON.parse(field.value) : "",
+    onUpdate: ({ editor }) => {
+      field.onChange(JSON.stringify(editor.getJSON()));
+    },
   });
 
   if (!editor) {
