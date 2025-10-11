@@ -8,6 +8,7 @@ import {
 } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import EditCourseForm from "./_components/EditCourseForm";
+import CourseStructure from "./_components/CourseStructure";
 
 type Props = {
   params: Promise<{ courseId: string }>;
@@ -43,8 +44,19 @@ export default async function EditCoursePage({ params }: Props) {
             </CardContent>
           </Card>
         </TabsContent>
+
         <TabsContent value="course-structure">
-          Change your password here.
+          <Card>
+            <CardHeader>
+              <CardTitle>Course Structure</CardTitle>
+              <CardDescription>
+                Here you can update your course structure
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <CourseStructure data={data} />
+            </CardContent>
+          </Card>
         </TabsContent>
       </Tabs>
     </div>

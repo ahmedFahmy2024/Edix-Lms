@@ -60,7 +60,6 @@ export async function CreateCourse(
       data: {
         ...validation.data,
         userId: session?.user.id as string,
-        status: "Draft",
       },
     });
 
