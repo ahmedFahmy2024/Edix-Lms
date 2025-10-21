@@ -14,7 +14,7 @@ export default function GlobalProvider({ children }: GlobalProviderProps) {
       disableTransitionOnChange
     >
       {children}
-      <Toaster expand={false} richColors position="bottom-right" />
+      <Toaster expand={false} richColors position="bottom-right" closeButton />
     </ThemeProvider>
   );
 }
