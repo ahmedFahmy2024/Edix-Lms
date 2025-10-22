@@ -1,5 +1,13 @@
 "use client";
-import React, { ReactNode, useEffect, useState } from "react";
+import { AdminCourseSingularType } from "@/app/data/admin/admin-get-course";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/components/ui/collapsible";
+import { cn } from "@/lib/utils";
 import {
   DndContext,
   DragEndEvent,
@@ -11,22 +19,13 @@ import {
   useSensors,
 } from "@dnd-kit/core";
 import {
-  SortableContext,
-  verticalListSortingStrategy,
-  useSortable,
-  sortableKeyboardCoordinates,
   arrayMove,
+  SortableContext,
+  sortableKeyboardCoordinates,
+  useSortable,
+  verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { AdminCourseSingularType } from "@/app/data/admin/admin-get-course";
-import { cn } from "@/lib/utils";
-import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from "@/components/ui/collapsible";
-import { Button } from "@/components/ui/button";
 import {
   ChevronDown,
   ChevronRight,
@@ -36,8 +35,12 @@ import {
   Trash2,
 } from "lucide-react";
 import Link from "next/link";
+import { ReactNode, useEffect, useState } from "react";
 import { toast } from "sonner";
 import { reorderChapter, reorderLessons } from "../actions/actions";
+import NewChapterModal from "./NewChapterModal";
+import NewLessonModal from "./NewLessonModal";
+import DeleteLessons from "./DeleteLessons";
 
 interface iAppProps {
   data: AdminCourseSingularType;
@@ -54,7 +57,6 @@ interface SoratbleItemProps {
 }
 
 export default function CourseStructure({ data }: iAppProps) {
-  console.log("data", data);
   const initialItems =
     data.chapter.map((chapter) => ({
       id: chapter.id,
@@ -89,8 +91,6 @@ export default function CourseStructure({ data }: iAppProps) {
       return updatedItems;
     });
   }, [data]);
-
-  console.log("items", items);
 
   const sensors = useSensors(
     useSensor(PointerSensor),
@@ -279,6 +279,7 @@ export default function CourseStructure({ data }: iAppProps) {
       <Card>
         <CardHeader className="flex flex-row items-center justify-between border-b border-border">
           <CardTitle>Chapters</CardTitle>
+          <NewChapterModal courseId={data.id} />
         </CardHeader>
 
         <CardContent className="space-y-8">
@@ -363,9 +364,11 @@ export default function CourseStructure({ data }: iAppProps) {
                                       </Link>
                                     </div>
 
-                                    <Button variant="outline" size="icon">
-                                      <Trash2 className="size-4" />
-                                    </Button>
+                                    <DeleteLessons
+                                      chapterId={item.id}
+                                      courseId={data.id}
+                                      lessonId={lesson.id}
+                                    />
                                   </div>
                                 )}
                               </SortableItem>
@@ -373,9 +376,10 @@ export default function CourseStructure({ data }: iAppProps) {
                           </SortableContext>
 
                           <div className="p-2">
-                            <Button className="w-full" variant="outline">
-                              Create New Lesson
-                            </Button>
+                            <NewLessonModal
+                              chapterId={item.id}
+                              courseId={data.id}
+                            />
                           </div>
                         </div>
                       </CollapsibleContent>
