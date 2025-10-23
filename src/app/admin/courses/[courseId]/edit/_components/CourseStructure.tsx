@@ -41,6 +41,7 @@ import { reorderChapter, reorderLessons } from "../actions/actions";
 import NewChapterModal from "./NewChapterModal";
 import NewLessonModal from "./NewLessonModal";
 import DeleteLessons from "./DeleteLessons";
+import DeleteChapter from "./DeleteChapter";
 
 interface iAppProps {
   data: AdminCourseSingularType;
@@ -326,9 +327,7 @@ export default function CourseStructure({ data }: iAppProps) {
                           </p>
                         </div>
 
-                        <Button size="icon" variant="outline">
-                          <Trash2 className="size-4" />
-                        </Button>
+                        <DeleteChapter chapterId={item.id} courseId={data.id} />
                       </div>
 
                       <CollapsibleContent>
