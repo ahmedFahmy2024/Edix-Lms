@@ -25,7 +25,7 @@ const HeadingThreeToolbar = React.forwardRef<HTMLButtonElement, ButtonProps>(
             className={cn(
               "h-8 w-8",
               editor?.isActive("heading", { level: 3 }) && "bg-accent",
-              className
+              className,
             )}
             onClick={(e) => {
               editor?.chain().focus().toggleHeading({ level: 3 }).run();
@@ -46,7 +46,7 @@ const HeadingThreeToolbar = React.forwardRef<HTMLButtonElement, ButtonProps>(
         </TooltipContent>
       </Tooltip>
     );
-  }
+  },
 );
 
 HeadingThreeToolbar.displayName = "HeadingThreeToolbar";

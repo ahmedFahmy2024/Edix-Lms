@@ -25,7 +25,7 @@ const StrikeThroughToolbar = React.forwardRef<HTMLButtonElement, ButtonProps>(
             className={cn(
               "h-8 w-8",
               editor?.isActive("strike") && "bg-accent",
-              className
+              className,
             )}
             onClick={(e) => {
               editor?.chain().focus().toggleStrike().run();
@@ -44,7 +44,7 @@ const StrikeThroughToolbar = React.forwardRef<HTMLButtonElement, ButtonProps>(
         </TooltipContent>
       </Tooltip>
     );
-  }
+  },
 );
 
 StrikeThroughToolbar.displayName = "StrikeThroughToolbar";

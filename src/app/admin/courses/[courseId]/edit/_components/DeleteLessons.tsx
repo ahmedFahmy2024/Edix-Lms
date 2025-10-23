@@ -34,7 +34,7 @@ export default function DeleteLessons({
           chapterId: chapterId,
           courseId: courseId,
           lessonId: lessonId,
-        })
+        }),
       );
 
       if (error) {

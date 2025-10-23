@@ -31,7 +31,7 @@ export default function DeleteChapter({
         deleteChapter({
           chapterId: chapterId,
           courseId: courseId,
-        })
+        }),
       );
 
       if (error) {

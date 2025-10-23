@@ -37,7 +37,7 @@ const BookOpenTextIcon = forwardRef<
       if (!isControlled.current) controls.start("animate");
       else onMouseEnter?.(e as any);
     },
-    [controls, reduced, onMouseEnter]
+    [controls, reduced, onMouseEnter],
   );
 
   const handleLeave = useCallback(
@@ -45,7 +45,7 @@ const BookOpenTextIcon = forwardRef<
       if (!isControlled.current) controls.start("normal");
       else onMouseLeave?.(e as any);
     },
-    [controls, onMouseLeave]
+    [controls, onMouseLeave],
   );
 
   const iconVariants: Variants = {

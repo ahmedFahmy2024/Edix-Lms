@@ -64,7 +64,7 @@ export default function EditCourseForm({ data }: iAppProps) {
   function onSubmit(values: CourseSchemaType) {
     startTransition(async () => {
       const { data: result, error } = await tryCatch(
-        EditCourse(values, data.id)
+        EditCourse(values, data.id),
       );
 
       if (error) {
@@ -169,7 +169,11 @@ export default function EditCourseForm({ data }: iAppProps) {
             <FormItem className="flex-1">
               <FormLabel>Thumbnail image</FormLabel>
               <FormControl>
-                <Uploader value={field.value} onChange={field.onChange} />
+                <Uploader
+                  value={field.value}
+                  onChange={field.onChange}
+                  fileTypeAccepted="image"
+                />
               </FormControl>
               <FormMessage />
             </FormItem>

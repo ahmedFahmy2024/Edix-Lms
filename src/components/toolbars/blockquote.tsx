@@ -25,7 +25,7 @@ const BlockquoteToolbar = React.forwardRef<HTMLButtonElement, ButtonProps>(
             className={cn(
               "h-8 w-8",
               editor?.isActive("blockquote") && "bg-accent",
-              className
+              className,
             )}
             onClick={(e) => {
               editor?.chain().focus().toggleBlockquote().run();
@@ -43,7 +43,7 @@ const BlockquoteToolbar = React.forwardRef<HTMLButtonElement, ButtonProps>(
         </TooltipContent>
       </Tooltip>
     );
-  }
+  },
 );
 
 BlockquoteToolbar.displayName = "BlockquoteToolbar";

@@ -192,7 +192,11 @@ export default function CreateCoursePage() {
                   <FormItem className="flex-1">
                     <FormLabel>Thumbnail image</FormLabel>
                     <FormControl>
-                      <Uploader value={field.value} onChange={field.onChange} />
+                      <Uploader
+                        value={field.value}
+                        onChange={field.onChange}
+                        fileTypeAccepted="image"
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>

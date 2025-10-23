@@ -20,19 +20,19 @@ const aj = arcjet
     detectBot({
       mode: "LIVE",
       allow: [],
-    })
+    }),
   )
   .withRule(
     fixedWindow({
       mode: "LIVE",
       window: "1m",
       max: 5,
-    })
+    }),
   );
 
 export async function EditCourse(
   values: CourseSchemaType,
-  courseId: string
+  courseId: string,
 ): Promise<ApiResponse> {
   const session = await requireAdmin();
 
@@ -91,7 +91,7 @@ export async function EditCourse(
 export async function reorderLessons(
   chapterId: string,
   lessons: { id: string; position: number }[],
-  courseId: string
+  courseId: string,
 ): Promise<ApiResponse> {
   await requireAdmin();
 
@@ -112,7 +112,7 @@ export async function reorderLessons(
         data: {
           position: lesson.position,
         },
-      })
+      }),
     );
 
     await prisma.$transaction(updates);
@@ -133,7 +133,7 @@ export async function reorderLessons(
 
 export async function reorderChapter(
   courseId: string,
-  chapters: { id: string; position: number }[]
+  chapters: { id: string; position: number }[],
 ): Promise<ApiResponse> {
   await requireAdmin();
 
@@ -154,7 +154,7 @@ export async function reorderChapter(
         data: {
           position: chapter.position,
         },
-      })
+      }),
     );
 
     await prisma.$transaction(updates);
@@ -174,7 +174,7 @@ export async function reorderChapter(
 }
 
 export async function createChapter(
-  values: ChapterSchemaType
+  values: ChapterSchemaType,
 ): Promise<ApiResponse> {
   await requireAdmin();
   try {
@@ -224,7 +224,7 @@ export async function createChapter(
 }
 
 export async function createLesson(
-  values: LessonSchemaType
+  values: LessonSchemaType,
 ): Promise<ApiResponse> {
   await requireAdmin();
   try {
@@ -390,7 +390,7 @@ export async function deleteChapter({
     const chapters = courseWithChapter.chapter;
 
     const chapterToDelete = chapters.find(
-      (chapter) => chapter.id === chapterId
+      (chapter) => chapter.id === chapterId,
     );
 
     if (!chapterToDelete) {
@@ -401,7 +401,7 @@ export async function deleteChapter({
     }
 
     const remainingChapters = chapters.filter(
-      (chapter) => chapter.id !== chapterId
+      (chapter) => chapter.id !== chapterId,
     );
 
     const updates = remainingChapters.map((chapter, index) => {

@@ -25,7 +25,7 @@ const TextAlignLeftToolbar = React.forwardRef<HTMLButtonElement, ButtonProps>(
             className={cn(
               "h-8 w-8",
               editor?.isActive({ textAlign: "left" }) && "bg-accent",
-              className
+              className,
             )}
             onClick={(e) => {
               editor?.chain().focus().setTextAlign("left").run();
@@ -43,7 +43,7 @@ const TextAlignLeftToolbar = React.forwardRef<HTMLButtonElement, ButtonProps>(
         </TooltipContent>
       </Tooltip>
     );
-  }
+  },
 );
 
 TextAlignLeftToolbar.displayName = "TextAlignLeftToolbar";

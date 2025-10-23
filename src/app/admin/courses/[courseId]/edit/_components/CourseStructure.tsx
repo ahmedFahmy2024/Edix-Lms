@@ -97,7 +97,7 @@ export default function CourseStructure({ data }: iAppProps) {
     useSensor(PointerSensor),
     useSensor(KeyboardSensor, {
       coordinateGetter: sortableKeyboardCoordinates,
-    })
+    }),
   );
 
   function handleDragEnd(event: DragEndEvent) {
@@ -144,7 +144,7 @@ export default function CourseStructure({ data }: iAppProps) {
         (chapter, index) => ({
           ...chapter,
           order: index + 1,
-        })
+        }),
       );
 
       const previoiusItems = [...items];
@@ -182,14 +182,14 @@ export default function CourseStructure({ data }: iAppProps) {
       // here we only allow lessons to be moved within the same chapter
       if (!chapterId || chapterId !== overChapterId) {
         toast.error(
-          "Lessons move between different chapters or invalid chapter ID is not allowed"
+          "Lessons move between different chapters or invalid chapter ID is not allowed",
         );
         return;
       }
 
       // we made this so we can find the chapter that the lesson belongs to
       const chapterIndex = items.findIndex(
-        (chapter) => chapter.id === chapterId
+        (chapter) => chapter.id === chapterId,
       );
 
       if (chapterIndex === -1) {
@@ -201,11 +201,11 @@ export default function CourseStructure({ data }: iAppProps) {
       console.log("chapterToUpdate", chapterToUpdate);
 
       const oldLessonIndex = chapterToUpdate.lessons.findIndex(
-        (lesson) => lesson.id === activeId
+        (lesson) => lesson.id === activeId,
       );
 
       const newLessonIndex = chapterToUpdate.lessons.findIndex(
-        (lesson) => lesson.id === overId
+        (lesson) => lesson.id === overId,
       );
 
       if (oldLessonIndex === -1 || newLessonIndex === -1) {
@@ -216,7 +216,7 @@ export default function CourseStructure({ data }: iAppProps) {
       const reorderedLessons = arrayMove(
         chapterToUpdate.lessons,
         oldLessonIndex,
-        newLessonIndex
+        newLessonIndex,
       );
 
       const updatedLessonForState = reorderedLessons.map((lesson, index) => ({
@@ -266,8 +266,8 @@ export default function CourseStructure({ data }: iAppProps) {
       items.map((chapter) =>
         chapter.id === chapterId
           ? { ...chapter, isOpen: !chapter.isOpen }
-          : chapter
-      )
+          : chapter,
+      ),
     );
   }
 

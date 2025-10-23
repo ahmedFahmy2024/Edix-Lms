@@ -25,7 +25,7 @@ const TextAlignRightToolbar = React.forwardRef<HTMLButtonElement, ButtonProps>(
             className={cn(
               "h-8 w-8",
               editor?.isActive({ textAlign: "right" }) && "bg-accent",
-              className
+              className,
             )}
             onClick={(e) => {
               editor?.chain().focus().setTextAlign("right").run();
@@ -45,7 +45,7 @@ const TextAlignRightToolbar = React.forwardRef<HTMLButtonElement, ButtonProps>(
         </TooltipContent>
       </Tooltip>
     );
-  }
+  },
 );
 
 TextAlignRightToolbar.displayName = "TextAlignRightToolbar";

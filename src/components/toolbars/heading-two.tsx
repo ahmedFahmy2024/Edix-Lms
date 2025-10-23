@@ -25,7 +25,7 @@ const HeadingTwoToolbar = React.forwardRef<HTMLButtonElement, ButtonProps>(
             className={cn(
               "h-8 w-8",
               editor?.isActive("heading", { level: 2 }) && "bg-accent",
-              className
+              className,
             )}
             onClick={(e) => {
               editor?.chain().focus().toggleHeading({ level: 2 }).run();
@@ -46,7 +46,7 @@ const HeadingTwoToolbar = React.forwardRef<HTMLButtonElement, ButtonProps>(
         </TooltipContent>
       </Tooltip>
     );
-  }
+  },
 );
 
 HeadingTwoToolbar.displayName = "HeadingTwoToolbar";
