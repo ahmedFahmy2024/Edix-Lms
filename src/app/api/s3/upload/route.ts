@@ -1,5 +1,5 @@
 import { requireAdmin } from "@/app/data/admin/require-admin";
-import arcjet, { detectBot, fixedWindow } from "@/lib/arcjet";
+import arcjet, { fixedWindow } from "@/lib/arcjet";
 import { env } from "@/lib/env";
 import { S3 } from "@/lib/s3Client";
 import { PutObjectCommand } from "@aws-sdk/client-s3";
@@ -15,20 +15,13 @@ export const fileUploadSchema = z.object({
   isImage: z.boolean(),
 });
 
-const aj = arcjet
-  .withRule(
-    detectBot({
-      mode: "LIVE",
-      allow: [],
-    }),
-  )
-  .withRule(
-    fixedWindow({
-      mode: "LIVE",
-      window: "1m",
-      max: 5,
-    }),
-  );
+const aj = arcjet.withRule(
+  fixedWindow({
+    mode: "LIVE",
+    window: "1m",
+    max: 5,
+  })
+);
 
 export async function POST(req: Request) {
   const session = await requireAdmin();
@@ -48,7 +41,7 @@ export async function POST(req: Request) {
     if (!validation.success) {
       return NextResponse.json(
         { error: "Invalid Request Body" },
-        { status: 400 },
+        { status: 400 }
       );
     }
 
@@ -76,7 +69,7 @@ export async function POST(req: Request) {
     console.log(error);
     return NextResponse.json(
       { error: "Failed to generate presigned URL" },
-      { status: 500 },
+      { status: 500 }
     );
   }
 }

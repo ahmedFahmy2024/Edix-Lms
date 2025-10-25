@@ -1,29 +1,22 @@
 "use server";
 
 import { requireAdmin } from "@/app/data/admin/require-admin";
-import arcjet, { detectBot, fixedWindow } from "@/lib/arcjet";
+import arcjet, { fixedWindow } from "@/lib/arcjet";
 import { prisma } from "@/lib/db";
 import { courseSchema, CourseSchemaType } from "@/lib/schema/courses.schema";
 import { ApiResponse } from "@/lib/types";
 import { request } from "@arcjet/next";
 
-const aj = arcjet
-  .withRule(
-    detectBot({
-      mode: "LIVE",
-      allow: [],
-    }),
-  )
-  .withRule(
-    fixedWindow({
-      mode: "LIVE",
-      window: "1m",
-      max: 5,
-    }),
-  );
+const aj = arcjet.withRule(
+  fixedWindow({
+    mode: "LIVE",
+    window: "1m",
+    max: 5,
+  })
+);
 
 export async function CreateCourse(
-  values: CourseSchemaType,
+  values: CourseSchemaType
 ): Promise<ApiResponse> {
   const session = await requireAdmin();
 
@@ -56,7 +49,7 @@ export async function CreateCourse(
       };
     }
 
-    const data = await prisma.course.create({
+    await prisma.course.create({
       data: {
         ...validation.data,
         userId: session?.user.id as string,
