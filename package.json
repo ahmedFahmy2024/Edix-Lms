@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "biome lint .",
     "format": "biome format . --write",
-    "check": "biome check ."
+    "check": "biome check .",
+    "postinstall": "prisma generate"
   },
   "dependencies": {
     "@arcjet/inspect": "1.0.0-beta.12",
