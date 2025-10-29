@@ -12,11 +12,15 @@ type Props = {
   };
   slug: string;
   isActive?: boolean;
+  completed: boolean;
 };
 
-export default function LessonItem({ lesson, slug, isActive }: Props) {
-  const completed = false;
-
+export default function LessonItem({
+  lesson,
+  slug,
+  isActive,
+  completed,
+}: Props) {
   return (
     <Link
       href={`/dashboard/${slug}/${lesson.id}`}
