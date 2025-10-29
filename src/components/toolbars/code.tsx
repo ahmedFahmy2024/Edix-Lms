@@ -3,7 +3,7 @@
 import { Code2 } from "lucide-react";
 import React from "react";
 
-import { Button, type ButtonProps } from "@/components/ui/button";
+import { Button } from "@/components/ui/button";
 import {
   Tooltip,
   TooltipContent,
@@ -12,7 +12,7 @@ import {
 import { cn } from "@/lib/utils";
 import { useToolbar } from "@/components/toolbars/toolbar-provider";
 
-const CodeToolbar = React.forwardRef<HTMLButtonElement, ButtonProps>(
+const CodeToolbar = React.forwardRef<HTMLButtonElement, React.ComponentProps<typeof Button>>(
   ({ className, onClick, children, ...props }, ref) => {
     const { editor } = useToolbar();
     return (
@@ -25,7 +25,7 @@ const CodeToolbar = React.forwardRef<HTMLButtonElement, ButtonProps>(
             className={cn(
               "h-8 w-8",
               editor?.isActive("code") && "bg-accent",
-              className,
+              className
             )}
             onClick={(e) => {
               editor?.chain().focus().toggleCode().run();
@@ -43,7 +43,7 @@ const CodeToolbar = React.forwardRef<HTMLButtonElement, ButtonProps>(
         </TooltipContent>
       </Tooltip>
     );
-  },
+  }
 );
 
 CodeToolbar.displayName = "CodeToolbar";

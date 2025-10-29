@@ -3,7 +3,7 @@
 import { List } from "lucide-react";
 import React from "react";
 
-import { Button, type ButtonProps } from "@/components/ui/button";
+import { Button } from "@/components/ui/button";
 import {
   Tooltip,
   TooltipContent,
@@ -12,7 +12,7 @@ import {
 import { cn } from "@/lib/utils";
 import { useToolbar } from "@/components/toolbars/toolbar-provider";
 
-const BulletListToolbar = React.forwardRef<HTMLButtonElement, ButtonProps>(
+const BulletListToolbar = React.forwardRef<HTMLButtonElement, React.ComponentProps<typeof Button>>(
   ({ className, onClick, children, ...props }, ref) => {
     const { editor } = useToolbar();
 
@@ -26,7 +26,7 @@ const BulletListToolbar = React.forwardRef<HTMLButtonElement, ButtonProps>(
             className={cn(
               "h-8 w-8",
               editor?.isActive("bulletList") && "bg-accent",
-              className,
+              className
             )}
             onClick={(e) => {
               editor?.chain().focus().toggleBulletList().run();
@@ -44,7 +44,7 @@ const BulletListToolbar = React.forwardRef<HTMLButtonElement, ButtonProps>(
         </TooltipContent>
       </Tooltip>
     );
-  },
+  }
 );
 
 BulletListToolbar.displayName = "BulletListToolbar";

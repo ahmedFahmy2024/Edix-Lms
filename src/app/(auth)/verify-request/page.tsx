@@ -15,12 +15,20 @@ import {
   InputOTPSlot,
 } from "@/components/ui/input-otp";
 import { authClient } from "@/lib/auth-client";
-import { useState, useTransition } from "react";
+import { Suspense, useState, useTransition } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { toast } from "sonner";
 import { Loader2Icon, Send } from "lucide-react";
 
-export default function VerifyRequest() {
+export default function VerifyRequestRoute() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <VerifyRequest />
+    </Suspense>
+  );
+}
+
+function VerifyRequest() {
   const [otp, setOtp] = useState("");
   const [emailPending, startEmailTransition] = useTransition();
   const params = useSearchParams();

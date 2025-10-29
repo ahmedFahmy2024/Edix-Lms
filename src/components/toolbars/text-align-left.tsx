@@ -4,7 +4,7 @@ import { AlignLeft } from "lucide-react";
 import React from "react";
 
 import { useToolbar } from "@/components/toolbars/toolbar-provider";
-import { Button, type ButtonProps } from "@/components/ui/button";
+import { Button } from "@/components/ui/button";
 import {
   Tooltip,
   TooltipContent,
@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
 
-const TextAlignLeftToolbar = React.forwardRef<HTMLButtonElement, ButtonProps>(
+const TextAlignLeftToolbar = React.forwardRef<HTMLButtonElement, React.ComponentProps<typeof Button>>(
   ({ className, onClick, children, ...props }, ref) => {
     const { editor } = useToolbar();
     return (
@@ -25,7 +25,7 @@ const TextAlignLeftToolbar = React.forwardRef<HTMLButtonElement, ButtonProps>(
             className={cn(
               "h-8 w-8",
               editor?.isActive({ textAlign: "left" }) && "bg-accent",
-              className,
+              className
             )}
             onClick={(e) => {
               editor?.chain().focus().setTextAlign("left").run();
@@ -43,7 +43,7 @@ const TextAlignLeftToolbar = React.forwardRef<HTMLButtonElement, ButtonProps>(
         </TooltipContent>
       </Tooltip>
     );
-  },
+  }
 );
 
 TextAlignLeftToolbar.displayName = "TextAlignLeftToolbar";

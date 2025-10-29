@@ -24,8 +24,8 @@ import { tryCatch } from "@/hooks/try-catch";
 import {
   courseCategories,
   courseLevel,
-  courseSchema,
-  CourseSchemaType,
+  courseFormSchema,
+  CourseFormSchemaType,
   courseStatus,
 } from "@/lib/schema/courses.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -45,26 +45,33 @@ interface iAppProps {
 export default function EditCourseForm({ data }: iAppProps) {
   const [isPending, startTransition] = useTransition();
   const router = useRouter();
-  const form = useForm<CourseSchemaType>({
-    resolver: zodResolver(courseSchema),
+  const form = useForm<CourseFormSchemaType>({
+    resolver: zodResolver(courseFormSchema),
     defaultValues: {
       title: data.title,
       description: data.description,
       fileKey: data.fileKey,
-      price: data.price,
-      duration: data.duration,
+      price: data.price.toString(),
+      duration: data.duration.toString(),
       level: data.level,
-      category: data.category as CourseSchemaType["category"],
+      category: data.category as CourseFormSchemaType["category"],
       smallDescription: data.smallDescription,
       slug: data.slug,
-      status: data.status as CourseSchemaType["status"],
+      status: data.status as CourseFormSchemaType["status"],
     },
   });
 
-  function onSubmit(values: CourseSchemaType) {
+  function onSubmit(values: CourseFormSchemaType) {
     startTransition(async () => {
+      // Convert form values to proper types for server
+      const serverValues = {
+        ...values,
+        price: parseFloat(values.price),
+        duration: parseInt(values.duration, 10),
+      };
+
       const { data: result, error } = await tryCatch(
-        EditCourse(values, data.id),
+        EditCourse(serverValues, data.id)
       );
 
       if (error) {
