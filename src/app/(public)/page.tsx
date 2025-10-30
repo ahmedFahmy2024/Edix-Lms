@@ -5,6 +5,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ChartNoAxesCombinedIcon } from "@/components/ui/ChartNoAxesCombinedIcon";
 import { SwordsIcon } from "@/components/ui/SwordsIcon";
 import { UsersIcon } from "@/components/ui/UsersIcon";
+import { auth } from "@/lib/auth";
+import { headers } from "next/headers";
 import Link from "next/link";
 
 type AnimatedIconProps = {
@@ -53,7 +55,13 @@ const features: FeatureProps[] = [
   },
 ];
 
-export default function Home() {
+export default async function Home() {
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
+
+  console.log(session);
+  console.log(session?.user);
   return (
     <>
       <section className="relative py-20">
