@@ -28,6 +28,8 @@ interface iAppProps {
 
 export default function AdminCourseCard({ data }: iAppProps) {
   const thumbnailUrl = useConstructUrl(data.fileKey);
+  console.log("data", data);
+  console.log("thumbnailUrl", thumbnailUrl);
   return (
     <Card className="group relative py-0 gap-0">
       <div className="absolute top-2 right-2 z-10">
