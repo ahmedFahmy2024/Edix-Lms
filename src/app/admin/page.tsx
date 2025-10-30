@@ -10,8 +10,11 @@ import AdminCourseCard, {
   AdminCourseCardSkeleton,
 } from "./courses/_components/AdminCourseCard";
 import { Suspense } from "react";
+import { requireAdmin } from "../data/admin/require-admin";
 
-export default function AdminIndexPage() {
+export default async function AdminIndexPage() {
+  // Ensure user has admin role
+  await requireAdmin();
   return (
     <>
       <SectionCards />
