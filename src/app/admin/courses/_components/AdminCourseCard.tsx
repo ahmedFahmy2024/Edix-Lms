@@ -47,12 +47,12 @@ export default function AdminCourseCard({ data }: iAppProps) {
               </Link>
             </DropdownMenuItem>
 
-            <DropdownMenuItem asChild>
+            {/* <DropdownMenuItem asChild>
               <Link href={`/admin/courses/${data.slug}`}>
                 <Eye className="size-4 mr-2" />
                 Preview
               </Link>
-            </DropdownMenuItem>
+            </DropdownMenuItem> */}
 
             <DropdownMenuSeparator />
 
