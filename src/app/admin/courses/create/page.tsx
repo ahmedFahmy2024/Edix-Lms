@@ -31,8 +31,8 @@ import { tryCatch } from "@/hooks/try-catch";
 import {
   courseCategories,
   courseLevel,
-  courseSchema,
-  CourseSchemaType,
+  courseFormSchema,
+  CourseFormSchemaType,
   courseStatus,
 } from "@/lib/schema/courses.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -50,8 +50,8 @@ export default function CreateCoursePage() {
   const [isPending, startTransition] = useTransition();
   const router = useRouter();
   const { triggerConfetti } = useConfetti();
-  const form = useForm<CourseSchemaType>({
-    resolver: zodResolver(courseSchema),
+  const form = useForm<CourseFormSchemaType>({
+    resolver: zodResolver(courseFormSchema),
     defaultValues: {
       title: "",
       description: "",
@@ -66,7 +66,7 @@ export default function CreateCoursePage() {
     },
   });
 
-  function onSubmit(values: CourseSchemaType) {
+  function onSubmit(values: CourseFormSchemaType) {
     startTransition(async () => {
       const { data: result, error } = await tryCatch(CreateCourse(values));
 
@@ -274,6 +274,9 @@ export default function CreateCoursePage() {
                           type="number"
                           placeholder="duration"
                           {...field}
+                          onChange={(e) =>
+                            field.onChange(Number(e.target.value) || 0)
+                          }
                         />
                       </FormControl>
                       <FormMessage />
@@ -288,7 +291,14 @@ export default function CreateCoursePage() {
                     <FormItem>
                       <FormLabel>price ($)</FormLabel>
                       <FormControl>
-                        <Input type="number" placeholder="price" {...field} />
+                        <Input
+                          type="number"
+                          placeholder="price"
+                          {...field}
+                          onChange={(e) =>
+                            field.onChange(Number(e.target.value) || 0)
+                          }
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>

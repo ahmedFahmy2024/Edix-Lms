@@ -51,8 +51,8 @@ export default function EditCourseForm({ data }: iAppProps) {
       title: data.title,
       description: data.description,
       fileKey: data.fileKey,
-      price: data.price.toString(),
-      duration: data.duration.toString(),
+      price: data.price,
+      duration: data.duration,
       level: data.level,
       category: data.category as CourseFormSchemaType["category"],
       smallDescription: data.smallDescription,
@@ -63,15 +63,8 @@ export default function EditCourseForm({ data }: iAppProps) {
 
   function onSubmit(values: CourseFormSchemaType) {
     startTransition(async () => {
-      // Convert form values to proper types for server
-      const serverValues = {
-        ...values,
-        price: parseFloat(values.price),
-        duration: parseInt(values.duration, 10),
-      };
-
       const { data: result, error } = await tryCatch(
-        EditCourse(serverValues, data.id)
+        EditCourse(values, data.id)
       );
 
       if (error) {
@@ -245,7 +238,14 @@ export default function EditCourseForm({ data }: iAppProps) {
               <FormItem>
                 <FormLabel>duration (hours)</FormLabel>
                 <FormControl>
-                  <Input type="number" placeholder="duration" {...field} />
+                  <Input
+                    type="number"
+                    placeholder="duration"
+                    {...field}
+                    onChange={(e) =>
+                      field.onChange(Number(e.target.value) || 0)
+                    }
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -259,7 +259,14 @@ export default function EditCourseForm({ data }: iAppProps) {
               <FormItem>
                 <FormLabel>price ($)</FormLabel>
                 <FormControl>
-                  <Input type="number" placeholder="price" {...field} />
+                  <Input
+                    type="number"
+                    placeholder="price"
+                    {...field}
+                    onChange={(e) =>
+                      field.onChange(Number(e.target.value) || 0)
+                    }
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>

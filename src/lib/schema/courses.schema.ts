@@ -26,11 +26,11 @@ export const courseFormSchema = z.object({
   fileKey: z.string().min(3, {
     message: "FileKey is required.",
   }),
-  price: z.string().min(1, {
-    message: "Price is required.",
+  price: z.number().min(1, {
+    message: "Price must be at least 1.",
   }),
-  duration: z.string().min(1, {
-    message: "Duration is required.",
+  duration: z.number().min(1, {
+    message: "Duration must be at least 1.",
   }),
   level: z.enum(courseLevel),
   category: z.enum(courseCategories, {
@@ -56,10 +56,10 @@ export const courseSchema = z.object({
   fileKey: z.string().min(3, {
     message: "FileKey is required.",
   }),
-  price: z.number().min(1, {
+  price: z.coerce.number().min(1, {
     message: "Price must be at least 1.",
   }),
-  duration: z.number().min(1, {
+  duration: z.coerce.number().min(1, {
     message: "Duration must be at least 1.",
   }),
   level: z.enum(courseLevel),
